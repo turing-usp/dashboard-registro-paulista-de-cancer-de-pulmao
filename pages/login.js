@@ -67,7 +67,7 @@ export default function Login(){
                             className={classes.loginButton}
                             variant="outlined"
                             onClick={makeLogin} 
-                            disable={state.values.loading}
+                            disabled={state.values.loading}
                             color="primary">
                                 Entrar
                             </Button>

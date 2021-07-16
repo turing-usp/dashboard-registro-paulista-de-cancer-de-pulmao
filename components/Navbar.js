@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: "#ffffff",
-    fontWeight: 800
+    fontWeight: 800,
+    marginLeft: theme.spacing(3)
   },
   loginButton: {
     color: "#ffffff"
@@ -25,20 +26,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Navbar() {
+export default function Navbar({user}) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false)
   const logOut = async () => {
     await signOut(loading, setLoading);
   }
+  console.log(Object.keys(user.attributes))
   return (
       <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <Image width={40} height={40}  className={classes.lungIcon}  src={lungIcon}/>
-          <Typography align="center"  variant="h5" className={classes.title}>
+          <Typography   variant="h5" className={classes.title}>
             Registro Paulista de Câncer de Pulmão
           </Typography>
-          <IconButton disable={loading} align="right" className={classes.loginButton} onClick={logOut}>
+          <Typography align="right"  variant="overline" className={classes.title}>
+            {user.attributes.name} @ {user.attributes["custom:instituicao"]}
+          </Typography>
+          <IconButton disabled={loading} align="right" className={classes.loginButton} onClick={logOut}>
               <ExitToApp/>
           </IconButton>
         </Toolbar>

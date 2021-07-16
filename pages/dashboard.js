@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [user, setUser] = React.useState(false);
   React.useEffect(() =>{
     async function getUser(){
-      let authUser = Auth.currentUserInfo();
+      let authUser = await Auth.currentUserInfo();
       setUser(authUser);
       setLoaded(true);
     }
@@ -35,7 +35,7 @@ export default function Dashboard() {
     }else{
       return (
         <div className={classes.mainDash}>
-          <Navbar/>
+          <Navbar user={user}/>
           // aqui vai o dashboard
         </div>
       )

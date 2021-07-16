@@ -36,7 +36,10 @@ const useStylesCreator = () => {
           card: {
             margin: "auto",
             width: "60%",
-            alignItems: "center"
+            alignItems: "center",
+            [theme.breakpoints.down('xs')]: {
+              width: "90%",
+            }
           },
           spacing: {
             marginTop: theme.spacing(5)
@@ -46,8 +49,6 @@ const useStylesCreator = () => {
           },
           mainDivLogin: {
             flexGrow: 1,  
-            minHeight: "100vh",
-            backgroundSize: '100% auto'
         },
         lungIcon: {
             marginLeft: theme.spacing(2),
@@ -62,6 +63,10 @@ const useStylesCreator = () => {
                 width: "90%",
               }
           },
+        logo: {
+          width: "auto",
+          height: "5vh"
+        },
         loginButton: {
               marginTop: theme.spacing(3)
           },
