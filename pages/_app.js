@@ -1,4 +1,5 @@
 import React from 'react';
+import useStylesCreator from '../styles/styles'
 import '../styles/globals.css'
 import PropTypes from 'prop-types';
 import Head from 'next/head';
@@ -18,7 +19,7 @@ const theme = createTheme({
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
-  
+  const classes = useStylesCreator()();
   React.useEffect(() => {
       // Remove the server-side injected CSS.
       const jssStyles = document.querySelector('#jss-server-side');

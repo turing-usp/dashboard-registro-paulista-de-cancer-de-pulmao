@@ -6,29 +6,58 @@ export async function signIn(username, password, state, setState) {
     init();
     let prevState = {...state};
     prevState.values.loading = true;
-    await setState({...prevState});
-    try {
-        const user = await Auth.signIn(username, password);
-        console.log(user)
-        return Router.push("/dashboard")
-    } catch (error) {
-        console.log('error signing in', error);
-        if (error.code === 'UserNotConfirmedException') {
-            prevState.values.error = "Usuário não confirmado, verifique seu email";
-        } else if (error.code === 'PasswordResetRequiredException') {
-            prevState.values.error = "Necessário mudança de senha";
-        } else if (error.code === 'NotAuthorizedException') {
-            prevState.values.error = "Usuário ou senha inválidos";
-        } else if (error.code === 'UserNotFoundException') {
-            prevState.values.error = "Usuário ou senha inválidos";
-        } else {
-            prevState.values.error = "Usuário ou senha inválidos";
+    await setState({...prevState}); 
+        try {
+            const user = await Auth.signIn(username, password);
+            console.log(user)
+
+            if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+                return Router.push("/change-password")
+            } else {
+                return Router.push("/dashboard")
+            } 
+        } catch (error) {
+            console.log('error signing in', error);
+            if (error.code === 'UserNotConfirmedException') {
+                prevState.values.error = "Usuário não confirmado, verifique seu email";
+            } else if (error.code === 'PasswordResetRequiredException') {
+                prevState.values.error = "Necessário mudança de senha";
+            } else if (error.code === 'NotAuthorizedException') {
+                prevState.values.error = "Usuário ou senha inválidos";
+            } else if (error.code === 'UserNotFoundException') {
+                prevState.values.error = "Usuário ou senha inválidos";
+            } else {
+                prevState.values.error = "Usuário ou senha inválidos";
+            }
+            prevState.values.loading = false;
+            return setState({...prevState});
         }
-        prevState.values.loading = false;
-        return setState({...prevState});
-    }
 
     
+}
+
+export async function firstLogin(username, password, newPassword){
+    init();
+    Auth.signIn(username, password)
+    .then(user => {
+        if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+            const { requiredAttributes } = user.challengeParam; // the array of required attributes, e.g ['email', 'phone_number']
+            Auth.completeNewPassword(
+                user,               
+                newPassword)      
+                .then(user => {
+                    console.log(user);
+                    return Router.push("/dashboard")
+            }).catch(e => {
+              console.log(e);
+              return alert(e)
+            });
+        } else {
+            return Router.push("/login")
+        }
+    }).catch(e => {
+        console.log(e);
+    });
 }
 
 export async function signOut(loading, setLoading) {
@@ -43,5 +72,7 @@ export async function signOut(loading, setLoading) {
         return ssetLoading(false);
     }
 }
+
+
 
 

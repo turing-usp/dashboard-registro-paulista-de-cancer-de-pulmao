@@ -53,7 +53,7 @@ const useStylesCreator = () => {
             marginLeft: theme.spacing(2),
             marginRight: theme.spacing(5)
           },
-          loginCard: {
+        loginCard: {
               align: "center", 
               margin: "auto",
               marginTop: theme.spacing(3),
@@ -62,9 +62,12 @@ const useStylesCreator = () => {
                 width: "90%",
               }
           },
-          loginButton: {
+        loginButton: {
               marginTop: theme.spacing(3)
-          }
+          },
+        confirmInput: {
+          width: "90%"
+        }
       })
 )
     )
