@@ -3,46 +3,37 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton, Grid, Card, CardContent  } from '@material-ui/core';
 import { ExitToApp} from '@material-ui/icons';
 import Image from 'next/image'
+import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import lung from '../assets/lungPicture.jpg'
+import lungIcon from '../assets/lungs.png'
+import useStylesCreator from '../styles/styles'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,    
-  },
-  title: {
-    flexGrow: 1,
-    fontWeight: 1000,
-    marginBottom: theme.spacing(3)
-  },
-  card: {
-    margin: "auto",
-    width: "60%"
-  },
-  spacing: {
-    marginTop: theme.spacing(5)
-  },
-  cardContent: {
-    align: "center"
-  }
-}));
 
 
 export default function Home() {
-  const classes = useStyles();
+  const classes = useStylesCreator()();
   return (
-    <div className={classes.root}>
-      <Grid alignContent="center" alignItems="center" justifyContent="center">
+    <>
+    <Head>
+    <title>
+      RPCP
+    </title>
+    </Head>
+    <div className={classes.mainDiv}>
+      <Grid container justify="center" alignContent="center" alignItems="center">
         <Grid item xs={12}>
           <div className={classes.spacing}/>
         </Grid>
-        <Grid item xs={12}>
+        <Grid align="center" item xs={12}>
           <Card className={classes.card}>
             <CardContent className={classes.cardContent}>
+              <Typography>
+                <Image width={40} height={40}  className={classes.lungIcon}  src={lungIcon}/>
+              </Typography>
               <Typography variant="h3" color="primary" className={classes.title}>
                 Registro Paulista de Câncer de Pulmão
               </Typography>
-              <Button size="large" variant="outlined" color="primary">
+              <Button href='/login' size="large" variant="outlined" color="primary">
                 Login
               </Button>
             </CardContent>
@@ -50,5 +41,6 @@ export default function Home() {
         </Grid>
       </Grid>
     </div>
+    </>
   )
 }
