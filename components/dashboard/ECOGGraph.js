@@ -44,11 +44,11 @@ export default function ECOGGraph({data, instituicao}){
     
     const onChangeFilter = () => {
         let filtered_by_age_institution = rawData.filter(isInAgeRange);
-        let updatedDataInstitution = prepareDataKey(filtered_by_age_institution, "ecog").sort(compareEcog)
+        let updatedDataInstitution = prepareDataKey(filtered_by_age_institution, "ecog")//.sort(compareEcog)
         setGroupedDataUserInstitute(updatedDataInstitution)
 
         let filtered_by_age_not_institution = rawData.filter(isInAgeRange);
-        let updatedDataNotInstitution = prepareDataKey(filtered_by_age_not_institution, "ecog").sort(compareEcog)
+        let updatedDataNotInstitution = prepareDataKey(filtered_by_age_not_institution, "ecog")//.sort(compareEcog)
         setGroupedDataNotUserInstitute(updatedDataNotInstitution)
     }
 
