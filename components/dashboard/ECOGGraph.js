@@ -3,19 +3,34 @@ import StopRoundedIcon from '@material-ui/icons/StopRounded';
 import useStylesCreator from '../../styles/styles'
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import BarChartSex from './BarChartBySex'
+import {prepareDataKey, isInAgeRange} from '../../controllers/reduceData'
 
+// para aparecer o eixo x type="category" height={100} tick={{fontSize: "1vh", width: 50, wordWrap: 'break-word'}} interval={0}
 function valuetext(ageRange) {
     return `${ageRange} anos`;
   }
 
-
-export default function ECOGGraph(data){
+function compareEcog( a, b ) {
+    if ( a.ecog < b.ecog ){
+      return -1;
+    }
+    if ( a.ecog > b.ecog ){
+      return 1;
+    }
+    return 0;
+  }
+export default function ECOGGraph({data, instituicao}){
     const classes = useStylesCreator()();
     const [ageRange, setAgeRange] = useState([0, 120]);
-    const [rawData, setRawData] = useState(data.data);
+    const [rawData, setRawData] = useState(data);
     const [sex, setSex] = useState("ambos");
-    const [filteredbyAge, setFilteredbyAge] = useState(data.data);
-    const [groupedData, setGroupedData] = useState([]);
+    const [dataUserInstitute, setDataUserInstitute] = useState([]);
+    const [dataNotUserInstitute, setDataNotUserInstitute] = useState([]);
+    const [groupedDataUserInsitute, setGroupedDataUserInstitute] = useState([]);
+    const [groupedDataNotUserInsitute, setGroupedDataNotUserInstitute] = useState([]);
+
+    //setDataUserInstitute(rawData.filter((obj) => {return obj['data_access_group'] == "USP"}))
 
     const isInAgeRange = (object) => {
         return parseFloat(object.idade_na_cirurgia) > ageRange[0] && parseFloat(object.idade_na_cirurgia) < ageRange[1]
@@ -26,56 +41,15 @@ export default function ECOGGraph(data){
         console.log("mudou")
         onChangeFilter()
       };
-
-    const prepareDataEcog = () => {
-        if(filteredbyAge.length != 0){
-            
-            let dataBySexAndECOG = {}//d3.group(filtered_by_age, d => d.ecog, d => d.sexo) d3 nao funfa em next - F
-            for(let i =0; i < filteredbyAge.length; i++){
-                let currentRegister = filteredbyAge[i]
-                if(currentRegister.ecog != null){
-                    let currentEcogValue = currentRegister.ecog 
-                    if(currentEcogValue in dataBySexAndECOG){
-                        let currentSex = currentRegister.sexo!=null?currentRegister.sexo:"indefinido"
-                        if(currentSex in dataBySexAndECOG[currentEcogValue]){
-                            dataBySexAndECOG[currentEcogValue][currentSex] = dataBySexAndECOG[currentEcogValue][currentSex] + 1;
-                        }else{
-                            dataBySexAndECOG[currentEcogValue][currentSex] = 1
-                        }
-                    }else{
-                        let currentSex = currentRegister.sexo!=null?currentRegister.sexo:"indefinido"
-                        dataBySexAndECOG[currentEcogValue] = {}
-                        dataBySexAndECOG[currentEcogValue][currentSex] = 1
-                    }
-                }
-                
-            }
-
-            let prepared_data = [];
-
-            Object.keys(dataBySexAndECOG).forEach((ecogClass, index) => {
-                prepared_data.push(
-                    {
-                        'ecog': dataBySexAndECOG[ecogClass], 
-                        'Feminino': dataBySexAndECOG[ecogClass]['feminino']!=null?dataBySexAndECOG[ecogClass]['feminino']:0,
-                        'Masculino': dataBySexAndECOG[ecogClass]['masculino']!=null?dataBySexAndECOG[ecogClass]['masculino']:0,
-                        'Indefinido': dataBySexAndECOG[ecogClass]['indefinido']!=null?dataBySexAndECOG[ecogClass]['indefinido']:0,
-                    }
-                    );
-            });
-
-            return prepared_data
-        }else{
-            return {}
-        }
-        
-    }
     
     const onChangeFilter = () => {
-        let filtered_by_age = rawData.filter(isInAgeRange);
-        setFilteredbyAge(filtered_by_age)
-        let updatedData = prepareDataEcog()
-        setGroupedData(updatedData)
+        let filtered_by_age_institution = rawData.filter(isInAgeRange);
+        let updatedDataInstitution = prepareDataKey(filtered_by_age_institution, "ecog").sort(compareEcog)
+        setGroupedDataUserInstitute(updatedDataInstitution)
+
+        let filtered_by_age_not_institution = rawData.filter(isInAgeRange);
+        let updatedDataNotInstitution = prepareDataKey(filtered_by_age_not_institution, "ecog").sort(compareEcog)
+        setGroupedDataNotUserInstitute(updatedDataNotInstitution)
     }
 
     useEffect(()=>{
@@ -113,30 +87,26 @@ export default function ECOGGraph(data){
                     valueLabelDisplay="auto"
                     aria-labelledby="ecog-age-slider"
                     getAriaValueText={valuetext}
+                    min={10}
                     max={130}
                 />
                 </div>
-                <ResponsiveContainer width={'99%'} height={300}>
-                    <BarChart
-                    width={500}
-                    height={300}
-                    data={groupedData}
-                    margin={{
-                        top: 20,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                    >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="ecog" tick={{ width: 75 }}  fontSize={3} interval={0} />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    {sex == "feminino" || sex == "ambos"?<Bar dataKey="Feminino" stackId="a" fill="#8884d8" />:""}
-                    {sex == "masculino" || sex == "ambos"?<Bar dataKey="Masculino" stackId="a" fill="#82ca9d" />:""}
-                    </BarChart>
-                </ResponsiveContainer>
+                <div style={{width: '100%', display:'flex'}}>
+                    <div style={{width: '48%'}}>
+                        <Typography variant="h6" color="secondary" style={{alignItems:'center', display:'flex', marginLeft:30, marginTop: 10, letterSpacing:1}}>
+                            Outras Instituições
+                        </Typography>
+                        <BarChartSex data={groupedDataNotUserInsitute} key="ecog" sex={sex}/>
+                    </div>
+
+                    <div style={{width: '48%'}}>
+                        <Typography variant="h6" color="secondary" style={{alignItems:'center', display:'flex', marginLeft:30, marginTop: 10, letterSpacing:1}}>
+                            {instituicao}
+                        </Typography>
+                        <BarChartSex data={groupedDataUserInsitute} key="ecog" sex={sex}/>
+                    </div>
+               </div>
+                <Box m={3}/>
                 </Paper>
         </Box>
     )

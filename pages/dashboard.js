@@ -46,7 +46,7 @@ export default function Dashboard() {
           <Navbar user={user}/>
           <Grid container spacing={3} className={classes.dashGrid} >
             <Grid item xs={6}>
-              <ECOGGraph data={registerData} />
+              <ECOGGraph data={registerData} instituicao={user.attributes["custom:instituicao"]}/>
             </Grid>
             <Grid item xs={6}>
             </Grid>
