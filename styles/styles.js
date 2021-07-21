@@ -22,6 +22,11 @@ const useStylesCreator = () => {
           position: 'absolute',
           height: 5
         },
+        dashGrid: {
+          margin: "auto",
+          marginTop: theme.spacing(1),
+          width: "95%"
+        },
         mainDiv: {
             flexGrow: 1,  
             backgroundImage: "url(/lungPicture.jpg)",

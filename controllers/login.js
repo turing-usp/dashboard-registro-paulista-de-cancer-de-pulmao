@@ -69,7 +69,7 @@ export async function signOut(loading, setLoading) {
     } catch (error) {
         console.log('error signing out: ', error);
         alert("erro ao fazer logout!")
-        return ssetLoading(false);
+        return setLoading(false);
     }
 }
 

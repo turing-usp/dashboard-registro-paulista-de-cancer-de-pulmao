@@ -32,8 +32,9 @@ export default function Login(){
                 RPCP - Login
             </title>
         </Head>
+        {state.values.loading?<LinearProgress/>:""}
+        {!state.values.loading?
         <Container>
-            {state.values.loading?<LinearProgress/>:""}
             <Card className={classes.loginCard}>
                 <CardContent>
                     <Grid align="center">
@@ -76,6 +77,7 @@ export default function Login(){
                 </CardContent>
             </Card>
         </Container>
+        :""}
     </div>
     )
 }
