@@ -22,6 +22,11 @@ const useStylesCreator = () => {
           position: 'absolute',
           height: 5
         },
+        formControl: {
+          marginBottom: theme.spacing(2),
+          width: "100%",
+          color: theme.palette.secondary
+        },
         dashGrid: {
           margin: "auto",
           marginTop: theme.spacing(1),

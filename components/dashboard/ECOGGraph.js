@@ -1,5 +1,6 @@
-import { Box, Typography, Paper, Slider} from '@material-ui/core';
+import { Box, Typography, Paper, Slider, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
+import useStylesCreator from '../../styles/styles'
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -9,8 +10,10 @@ function valuetext(ageRange) {
 
 
 export default function ECOGGraph(data){
+    const classes = useStylesCreator()();
     const [ageRange, setAgeRange] = useState([0, 120]);
     const [rawData, setRawData] = useState(data.data);
+    const [sex, setSex] = useState("ambos");
     const [filteredbyAge, setFilteredbyAge] = useState(data.data);
     const [groupedData, setGroupedData] = useState([]);
 
@@ -20,6 +23,8 @@ export default function ECOGGraph(data){
 
     const handleChange = (event, newValue) => {
         setAgeRange(newValue);
+        console.log("mudou")
+        onChangeFilter()
       };
 
     const prepareDataEcog = () => {
@@ -66,12 +71,16 @@ export default function ECOGGraph(data){
         
     }
     
-    useEffect(()=>{
-        let updatedData = prepareDataEcog()
+    const onChangeFilter = () => {
         let filtered_by_age = rawData.filter(isInAgeRange);
         setFilteredbyAge(filtered_by_age)
+        let updatedData = prepareDataEcog()
         setGroupedData(updatedData)
-    })
+    }
+
+    useEffect(()=>{
+        onChangeFilter()
+    },[])
 
     return(
         <Box display="inline-block" width={'100%'}>
@@ -80,6 +89,20 @@ export default function ECOGGraph(data){
                 <StopRoundedIcon color="primary" style={{marginRight:10}} />
                     ECOG
                 </Typography>
+                <div style={{width: "90%", margin: "auto"}}>
+                <FormControl className={classes.formControl}>
+                    <InputLabel color="secondary" htmlFor="ecog-sex-selector">Sexo</InputLabel>
+                    <Select
+                    labelId="ecog-sex-selector"
+                    value={sex}
+                    onChange={(e) => {setSex(e.target.value)}}
+                    >
+                    <MenuItem value={"feminino"}>Faminino</MenuItem>
+                    <MenuItem value={"masculino"}>Masculino</MenuItem>
+                    <MenuItem value={"ambos"}>Ambos</MenuItem>
+                    </Select>
+                </FormControl>
+                </div>
                 <div style={{width: "90%", margin: "auto"}}>
                     <Typography color="secondary" id="ecog-age-slider" gutterBottom>
                         Idade
@@ -106,12 +129,12 @@ export default function ECOGGraph(data){
                     }}
                     >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="ecog"  fontSize={3} interval={0} />
+                    <XAxis dataKey="ecog" tick={{ width: 75 }}  fontSize={3} interval={0} />
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Feminino" stackId="a" fill="#8884d8" />
-                    <Bar dataKey="Masculino" stackId="a" fill="#82ca9d" />
+                    {sex == "feminino" || sex == "ambos"?<Bar dataKey="Feminino" stackId="a" fill="#8884d8" />:""}
+                    {sex == "masculino" || sex == "ambos"?<Bar dataKey="Masculino" stackId="a" fill="#82ca9d" />:""}
                     </BarChart>
                 </ResponsiveContainer>
                 </Paper>
