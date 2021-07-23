@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
-export default function BarChartInstitution({data, key, instituicao}){
+export default function BarChartInstitution({data, dataKey, instituicao}){
+    console.log(dataKey)
     return(
             <ResponsiveContainer width={'99%'} height={300}>
                 <BarChart
@@ -19,12 +20,12 @@ export default function BarChartInstitution({data, key, instituicao}){
                     }}
                     >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey={key} tick={false}/>
+                    <XAxis dataKey={dataKey} tick={false}/>
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Outras" fill="#8884d8" />
-                    <Bar dataKey={instituicao} stackId="a" fill="#82ca9d" />
+                    <Bar dataKey="Outras" fill="#464F51" />
+                    <Bar dataKey={instituicao} stackId="a" fill="#23B5D3" />
                 </BarChart>
             </ResponsiveContainer>
     )

@@ -20,9 +20,6 @@ export default function CharlsonGraph({instituicao}){
 
     }
 
-    
-
-
     useEffect(()=>{
         getDataFromAgeRange()
     },[])

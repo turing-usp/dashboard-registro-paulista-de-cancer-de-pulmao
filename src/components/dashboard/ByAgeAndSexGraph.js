@@ -27,7 +27,7 @@ export default function ByAgeAndSexGraph({instituicao, dataKey}){
 
     const handleChangeAge = (event, newValue) => {
         setAgeRange(newValue);
-        if(Date.now() - lastRequestTime > 1500){
+        if(Date.now() - lastRequestTime > 800){
             console.log("faztempo")
             setLastRequestTime(Date.now())
             getDataFromAgeRange()

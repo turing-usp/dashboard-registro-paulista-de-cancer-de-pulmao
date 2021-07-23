@@ -32,7 +32,7 @@ export default function Navbar({user}) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false)
   const logOut = async () => {
-    await signOut(loading, setLoading);
+    await signOut(loading, setLoading, history);
   }
   console.log(Object.keys(user.attributes))
   return (
@@ -47,7 +47,7 @@ export default function Navbar({user}) {
           <Typography align="right"  variant="overline" className={classes.title}>
             {user.attributes.name} @ {user.attributes["custom:instituicao"]}
           </Typography>
-          <IconButton disabled={loading} align="right" className={classes.loginButton} onClick={() => {logOut(history)}}>
+          <IconButton disabled={loading} align="right" className={classes.loginButton} onClick={logOut}>
               <ExitToApp/>
           </IconButton>
         </Toolbar>
