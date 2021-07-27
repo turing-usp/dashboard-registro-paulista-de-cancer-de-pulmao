@@ -1,4 +1,4 @@
-import Amplify, { Auth, API } from 'aws-amplify';
+import { Auth, API } from 'aws-amplify';
 import init from './configure';
 
 export async function getDataByAgeAndSex(dataKey, lowerbound, upperbound, instituicao){

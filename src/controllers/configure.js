@@ -1,4 +1,4 @@
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 
 export default function init(){
     Amplify.configure({

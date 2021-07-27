@@ -1,14 +1,14 @@
-import { Box, Typography, Paper, Slider, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { Box, Typography, Paper, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 import useStylesCreator from '../../styles/styles'
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import {getDataByAgeAndSex} from '../../controllers/getData'
 import BarChartByInstitution from './BarChartByInstitution'
 
 
 export default function CharlsonGraph({instituicao}){
     const classes = useStylesCreator()();
+    // eslint-disable-next-line no-unused-vars
     const [params, setParams] = useState({instituicao: instituicao, dataKey: "charlson_pontuacao"})
     const [data, setData] = useState({});
     const [sex, setSex] = useState("ambos");

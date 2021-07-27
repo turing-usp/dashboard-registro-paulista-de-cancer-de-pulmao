@@ -1,7 +1,6 @@
 import React from 'react';
 import Routes from './routes';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import './App.css'
 
 const theme = createTheme({

@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Container, TextField, Typography, Button, IconButton, Grid, Card, CardContent, LinearProgress  } from '@material-ui/core';
+import { Container, TextField, Typography, Button, Grid, Card, CardContent, LinearProgress  } from '@material-ui/core';
 import init from '../controllers/configure'
 import { signIn } from '../controllers/login'
 import lungIcon from '../assets/lungs.png'
@@ -34,7 +33,7 @@ export default function Login(){
                     <Grid align="center">
                         <Grid item xs={6} align="center">
                             <Typography>
-                                <img width={40} height={40}  className={classes.lungIcon}  src={lungIcon}/>
+                                <img width={40} height={40}  className={classes.lungIcon}  src={lungIcon} alt="pulmão"/>
                             </Typography>
                             <Typography variant="h5" color="primary">
                                 Registro Paulista de Câncer de Pulmão
@@ -51,7 +50,7 @@ export default function Login(){
                         <Grid item xs={12} align="center">
                             <TextField
                             error={state.values.error}
-                            helperText={state.values.error != false?state.values.error:""}
+                            helperText={state.values.error !== false?state.values.error:""}
                             label="Senha"
                             type="password"
                             onChange={(e) => setPassword(e.target.value)}

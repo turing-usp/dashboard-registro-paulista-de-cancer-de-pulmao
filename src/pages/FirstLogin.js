@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Container, TextField,FormControl, InputLabel, Input, InputAdornment,  Typography, Button, IconButton, Grid, Card, CardContent, LinearProgress  } from '@material-ui/core';
+import { Container, FormControl, InputLabel, Input, InputAdornment,  Typography, Button, IconButton, Grid, Card, CardContent, LinearProgress  } from '@material-ui/core';
 import init from '../controllers/configure'
 import { firstLogin } from '../controllers/login'
 import lungIcon from '../assets/lungs.png'
@@ -59,7 +58,7 @@ export default function FirstLogin(){
                     <Grid align="center">
                         <Grid item xs={6} align="center">
                             <Typography>
-                                <img className={classes.lungIcon}  src={lungIcon}/>
+                                <img className={classes.lungIcon}  src={lungIcon} alt="Pulmão"/>
                             </Typography>
                             <Typography variant="h5" color="primary">
                                 Registro Paulista de Câncer de Pulmão
@@ -121,7 +120,7 @@ export default function FirstLogin(){
                                 type={passwordValues.showPassword ? 'text' : 'password'}
                                 value={passwordValues.confirmPassword}
                                 error={passwordValues.error}
-                                helperText={passwordValues.error != false?"Os campos não coincidem":""}
+                                helperText={passwordValues.error !== false?"Os campos não coincidem":""}
                                 onChange={(e) => {changePasswordValues("confirmPassword", e.target.value)}}
                                 endAdornment={
                                 <InputAdornment position="end">

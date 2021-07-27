@@ -2,7 +2,6 @@ import { Box, Typography, Paper, Slider, FormControl, InputLabel, Select, MenuIt
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 import useStylesCreator from '../../styles/styles'
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import {getDataByAgeAndSex} from '../../controllers/getData'
 import BarChartByInstitution from './BarChartByInstitution'
 
@@ -12,6 +11,7 @@ function valuetext(ageRange) {
 
 export default function ByAgeAndSexGraph({instituicao, dataKey}){
     const classes = useStylesCreator()();
+    // eslint-disable-next-line no-unused-vars
     const [params, setParams] = useState({instituicao: instituicao, dataKey: dataKey})
     const [ageRange, setAgeRange] = useState([0, 120]);
     const [lastRequestTime, setLastRequestTime] = useState(Date.now());

@@ -1,7 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Grid, Card, CardContent, Divider  } from '@material-ui/core';
-import Navbar from '../components/Navbar'
+import { Typography, Button, Box, Grid, Card, CardContent, Divider  } from '@material-ui/core';
 import lungIcon from '../assets/lungs.png'
 import useStylesCreator from '../styles/styles'
 import { Book, LocalHospital, Dashboard } from '@material-ui/icons';
@@ -20,7 +18,7 @@ export default function Home() {
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
                 <div style={{height: "10vh"}}>
-                  <img style={{height: "100%"}} className={classes.lungIcon}  src={lungIcon}/>
+                  <img style={{height: "100%"}} className={classes.lungIcon}  src={lungIcon} alt="Pulmão"/>
                 </div>
                 <Typography variant="h3" color="primary" className={classes.title}>
                   Registro Paulista de Câncer de Pulmão

@@ -1,11 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Grid, Typography, Button, IconButton, LinearProgress  } from '@material-ui/core';
-import { ExitToApp} from '@material-ui/icons';
+import { Grid, LinearProgress  } from '@material-ui/core';
 import Navbar from '../components/Navbar'
-import Amplify, { Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import init from '../controllers/configure'
-import getData from '../controllers/getData'
 import useStylesCreator from '../styles/styles'
 import { useHistory } from "react-router-dom";
 import ByAgeAndSexGraph from '../components/dashboard/ByAgeAndSexGraph'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton  } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton  } from '@material-ui/core';
 import { ExitToApp} from '@material-ui/icons';
 import lungIcon from '../assets/lungs.png'
 import {signOut} from '../controllers/login'
@@ -39,7 +39,7 @@ export default function Navbar({user}) {
       <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <div style={{height: "4vh"}}>
-            <img style={{height: "100%"}} className={classes.lungIcon}  src={lungIcon}/>
+            <img style={{height: "100%"}} alt="Pulmão" className={classes.lungIcon}  src={lungIcon}/>
           </div>
           <Typography   variant="h5" className={classes.title}>
             Registro Paulista de Câncer de Pulmão

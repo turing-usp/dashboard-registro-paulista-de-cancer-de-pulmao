@@ -8,17 +8,6 @@ const useStylesCreator = () => {
           margin: 0,
           width: "100%"
         },
-        title: {
-          flexGrow: 1,
-        },
-        loginButton: {
-          color: "#ffffff"
-        },
-        lungIcon: {
-          align: "center",
-          margin: 'auto',
-          height: "100%"
-        },
         loading: {
           top: 0,
           width: '100%',

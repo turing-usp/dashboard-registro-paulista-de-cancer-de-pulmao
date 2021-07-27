@@ -1,4 +1,4 @@
-import Amplify, { Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import init from './configure';
 
 export async function signIn(username, password, state, setState, history) {
@@ -40,7 +40,7 @@ export async function firstLogin(username, password, newPassword, history){
     Auth.signIn(username, password)
     .then(user => {
         if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-            const { requiredAttributes } = user.challengeParam; // the array of required attributes, e.g ['email', 'phone_number']
+            // const { requiredAttributes } = user.challengeParam; // the array of required attributes, e.g ['email', 'phone_number']
             Auth.completeNewPassword(
                 user,               
                 newPassword)      
