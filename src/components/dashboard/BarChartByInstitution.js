@@ -3,9 +3,8 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 
 
 export default function BarChartInstitution({data, dataKey, instituicao}){
-    console.log(dataKey)
     return(
-            <ResponsiveContainer width={'99%'} height={300}>
+            <ResponsiveContainer width={'99%'} height={350}>
                 <BarChart
                     width={500}
                     height={300}

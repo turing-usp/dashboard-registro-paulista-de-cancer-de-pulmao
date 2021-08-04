@@ -12,7 +12,7 @@ export default function init(){
             endpoints: [
                 {
                     name: "RPCPEndpoints",
-                    endpoint: "https://d0ajslo74a.execute-api.sa-east-1.amazonaws.com/dev/"
+                    endpoint: "https://og2fynft9d.execute-api.sa-east-1.amazonaws.com/dev/"
                 }
             ]
         }

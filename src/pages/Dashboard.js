@@ -8,10 +8,12 @@ import init from '../controllers/configure'
 import getData from '../controllers/getData'
 import useStylesCreator from '../styles/styles'
 import { useHistory } from "react-router-dom";
+import { rollup, sum } from 'd3-array';
+import { getDataAge } from '../controllers/getData'
 import ByAgeAndSexGraph from '../components/dashboard/ByAgeAndSexGraph'
-import CharlsonGraph from '../components/dashboard/CharlsonGraph'
-
-
+import BySexGraph from '../components/dashboard/BySexGraph'
+import ByAgeRaceAndSexGraph from '../components/dashboard/ByAgeRaceAndSexGraph'
+import BySurgYearGraph from '../components/dashboard/BySurgYearGraph'
 //await Auth.currentAuthenticatedUser()
 
 export default function Dashboard() {
@@ -24,7 +26,6 @@ export default function Dashboard() {
   React.useEffect(() =>{
     async function getUser(){
       let authUser = await Auth.currentUserInfo();
-      console.log(authUser)
       setUser(authUser);
       setLoaded(true);
     }
@@ -42,13 +43,28 @@ export default function Dashboard() {
           <Navbar user={user}/>
           <Grid container spacing={3} className={classes.dashGrid} >
             <Grid item xs={6}>
-              <ByAgeAndSexGraph instituicao={user.attributes['custom:instituicao']} dataKey="ecog"/>
+              <ByAgeAndSexGraph instituicao={user.attributes['custom:instituicao']} dataKey="ecog" title="ECOG"/>
             </Grid>
             <Grid item xs={6}>
-              <ByAgeAndSexGraph instituicao={user.attributes['custom:instituicao']} dataKey="asa"/>
+              <ByAgeAndSexGraph instituicao={user.attributes['custom:instituicao']} dataKey="asa" title="ASA"/>
             </Grid>
             <Grid item xs={6}>
-              <CharlsonGraph instituicao={user.attributes['custom:instituicao']}/>
+              <BySexGraph instituicao={user.attributes['custom:instituicao']} dataKey="charlson_pontuacao" title="Charlson pontuação"/>
+            </Grid>
+            <Grid item xs={6}>
+              <ByAgeRaceAndSexGraph instituicao={user.attributes['custom:instituicao']} dataKey="tnm_clinico___8a_edicao" title="TNM clínico  (8a edição)"/>
+            </Grid>
+            <Grid item xs={6}>
+              <ByAgeRaceAndSexGraph instituicao={user.attributes['custom:instituicao']} dataKey="tnm_clinico___7a_edicao" title="TNM clínico  (7a edição)"/>
+            </Grid>
+            <Grid item xs={6}>
+              <BySurgYearGraph instituicao={user.attributes['custom:instituicao']} dataKey="acesso_realizado" title="Acesso realizado"/>
+            </Grid>
+            <Grid item xs={6}>
+              <BySurgYearGraph instituicao={user.attributes['custom:instituicao']} dataKey="para_onde_o_paciente_foi_encaminhado" title="Encaminhamento no pós-operatório"/>
+            </Grid>
+            <Grid item xs={6}>
+              <BySurgYearGraph instituicao={user.attributes['custom:instituicao']} dataKey="readmissao_em_qualquer_hospital_em_30_dias_apos_a_alta" title="Readmissão em 30 dias"/>
             </Grid>
           </Grid>
         </div>

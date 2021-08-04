@@ -6,21 +6,28 @@ import {getDataByAgeAndSex} from '../../controllers/getData'
 import BarChartByInstitution from './BarChartByInstitution'
 import {getDataAge} from '../../controllers/getData'
 import { rollup, sum, map } from 'd3-array';
+import { TramRounded } from '@material-ui/icons';
 
 
 
 
-export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
+export default function ByAgeRaceAndSexGraph({instituicao, dataKey, title}){
     const classes = useStylesCreator()();
     const [params, setParams] = useState({instituicao: instituicao, dataKey: dataKey})
     const [data, setData] = useState([]);
     const [loaded, setLoaded] = useState(false);
     const [dataPrepared, setDataPrepared] = useState([]);
     const [sex, setSex] = useState({feminino: true, masculino: true});
+    const [race, setRace] = useState({"Parda/Mulato": true, "Asiático": true, "Branca": true, "Negra": true, "Indígena": true, "Ignorado": true});
     const [age, setAge] = useState({"0 - 40": true, "40 - 50": true, "50 - 60": true, "60 - 70": true, "70 - 80": true, "80 - 150": true});
 
     const handleChangeSex = (event) => {
         setSex({ ...sex, [event.target.name]: event.target.checked });
+
+    }
+
+    const handleChangeRace = (event) => {
+        setRace({ ...race, [event.target.name]: event.target.checked });
 
     }
 
@@ -30,7 +37,6 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
 
     const getDataFromAgeRange = async () => {
         let dataGet = await getDataAge(params.dataKey,  params.instituicao)
-        console.log(dataGet)
         setData(dataGet)
         setLoaded(true)
         prepareData();
@@ -38,7 +44,7 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
     }
     
     const isFiltered = (entry) => {
-        return sex[entry.sexo] && age[entry.grupo_idade_na_cirurgia]
+        return sex[entry.sexo] && age[entry.grupo_idade_na_cirurgia] && race[entry.raca]
     }
 
     const prepareData = () => {
@@ -67,6 +73,10 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
     useEffect(() => {
         prepareData();
     },[age])
+
+    useEffect(() => {
+        prepareData();
+    },[race])
 
 //<BarChartByInstitution data={dataPrepared} dataKey={params.dataKey} instituicao={params.instituicao}/>
     return(
@@ -121,6 +131,33 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
                         control={<Checkbox checked={age["80 - 150"]} onChange={handleChangeAge} name="80 - 150" />}
                         label=">80"
                     />
+                    </FormGroup>
+                </div>
+                <div style={{width: "90%", margin: "auto"}}>
+                    <Typography color="secondary" id="ecog-age-slider" gutterBottom>
+                        Raça
+                    </Typography>
+                    <FormGroup row> 
+                        <FormControlLabel
+                            control={<Checkbox checked={race["Asiático"]} onChange={handleChangeRace} name="Asiático" />}
+                            label="Asiático"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox checked={race["Branca"]} onChange={handleChangeRace} name="Branca" />}
+                            label="Branca"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox checked={race["Indígena"]} onChange={handleChangeRace} name="Indígena" />}
+                            label="Indígena"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox checked={race["Ignorado"]} onChange={handleChangeRace} name="Ignorado" />}
+                            label="Ignorado"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox checked={race["Parda/Mulato"]} onChange={handleChangeRace} name="Parda/Mulato" />}
+                            label="Parda/Mulato"
+                        />
                     </FormGroup>
                 </div>
                 <div style={{width: '100%', display:'flex'}}>
