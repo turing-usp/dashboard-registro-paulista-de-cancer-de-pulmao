@@ -70,9 +70,10 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
 
 //<BarChartByInstitution data={dataPrepared} dataKey={params.dataKey} instituicao={params.instituicao}/>
     return(
-        <Box display="inline-block" width={'100%'}>
+        <Box display="inline-block" width={'100%'} style={{height:'100%', flexDirection: "column"}}>
             {loaded?
-            <Paper elevation={0} variant="outlined" >
+            <Paper elevation={0} variant="outlined" style={{height:'100%'}} >
+            <div style={{height: "30%"}}>
             <Typography variant="h5" color="secondary" style={{alignItems:'center', display:'flex', marginLeft:10, marginTop: 10,  marginBottom: 30, letterSpacing:1}}>
                 <StopRoundedIcon color="primary" style={{marginRight:10}} />
                     {title}
@@ -123,9 +124,10 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
                     />
                     </FormGroup>
                 </div>
-                <div style={{width: '100%', display:'flex'}}>
+                </div>
+                <div style={{width: '100%', height:'65%',  display: "flex", flexDirection: "column-reverse"}}>
                     <BarChartByInstitution data={dataPrepared} dataKey={params.dataKey} instituicao={params.instituicao}/>
-            </div>
+                </div>
                 <Box m={3}/>
                 </Paper>
             :<LinearProgress/>}

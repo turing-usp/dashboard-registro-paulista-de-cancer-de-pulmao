@@ -7,13 +7,13 @@ import './App.css'
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#23B5D3"
+      main: "#3db0fa"
     },
     secondary: {
       main: "#A2AEBB",
     },
   },
-})
+})  
 
 function App() {
   return (

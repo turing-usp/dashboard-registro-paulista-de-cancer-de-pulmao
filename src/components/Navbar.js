@@ -36,7 +36,7 @@ export default function Navbar({user}) {
   }
   console.log(Object.keys(user.attributes))
   return (
-      <AppBar className={classes.appBar} position="static">
+      <AppBar className={classes.appBar} color="secondary" position="absolute">
         <Toolbar>
           <div style={{height: "4vh"}}>
             <img style={{height: "100%"}} className={classes.lungIcon}  src={lungIcon}/>

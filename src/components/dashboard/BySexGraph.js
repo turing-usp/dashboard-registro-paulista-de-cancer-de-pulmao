@@ -60,9 +60,10 @@ export default function BySexGraph({instituicao, dataKey, title}){
 
 //<BarChartByInstitution data={dataPrepared} dataKey={params.dataKey} instituicao={params.instituicao}/>
     return(
-        <Box display="inline-block" style={{height:'100%'}} width={'100%'}>
+        <Box display="flex" style={{height:'100%', flexDirection: "column"}} width={'100%'}>
             {loaded?
             <Paper elevation={0} style={{height:'100%'}} variant="outlined" >
+            <div style={{height: "30%"}}>
             <Typography variant="h5" color="secondary" style={{alignItems:'center', display:'flex', marginLeft:10, marginTop: 10,  marginBottom: 30, letterSpacing:1}}>
                 <StopRoundedIcon color="primary" style={{marginRight:10}} />
                     {title}
@@ -82,7 +83,8 @@ export default function BySexGraph({instituicao, dataKey, title}){
                     />
                     </FormGroup>
                 </div>
-                <div style={{width: '100%', display:'flex'}}>
+                </div>
+                <div style={{width: '100%', height:'65%',  display: "flex", flexDirection: "column-reverse"}}>
                     <BarChartByInstitution data={dataPrepared} dataKey={params.dataKey} instituicao={params.instituicao}/>
                 </div>
                 <Box m={3}/>

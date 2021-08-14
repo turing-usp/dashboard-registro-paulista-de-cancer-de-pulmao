@@ -4,7 +4,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 
 export default function BarChartInstitution({data, dataKey, instituicao}){
     return(
-            <ResponsiveContainer width={'99%'} height={350}>
+            <ResponsiveContainer width={'99%'} height={'99%'}>
                 <BarChart
                     width={500}
                     height={300}
@@ -24,7 +24,7 @@ export default function BarChartInstitution({data, dataKey, instituicao}){
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="Outras" fill="#464F51" />
-                    <Bar dataKey={instituicao} stackId="a" fill="#23B5D3" />
+                    <Bar dataKey={instituicao} stackId="a" fill="#3db0fa" />
                 </BarChart>
             </ResponsiveContainer>
     )

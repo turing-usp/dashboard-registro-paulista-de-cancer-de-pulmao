@@ -4,6 +4,7 @@ const useStylesCreator = () => {
     return(
       makeStyles((theme) => ({
         mainDash: {
+          marginTop: theme.spacing(10),
           flexGrow: 1,
           margin: 0,
           width: "100%"
@@ -37,7 +38,8 @@ const useStylesCreator = () => {
         },
         mainDiv: {
             flexGrow: 1,  
-            backgroundImage: "url('../assets/lungPicture.jpg')",
+            width: "100%",
+            backgroundColor: "#eff1f3",
             minHeight: "100vh",
             backgroundSize: '100% auto'
           },

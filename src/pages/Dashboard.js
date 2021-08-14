@@ -39,8 +39,8 @@ export default function Dashboard() {
     }else{
       return (
         <>
+        <Navbar user={user}/>
         <div className={classes.mainDash}>
-          <Navbar user={user}/>
           <Grid container spacing={3} className={classes.dashGrid} >
             <Grid item xs={6}>
               <ByAgeAndSexGraph instituicao={user.attributes['custom:instituicao']} dataKey="ecog" title="ECOG"/>
