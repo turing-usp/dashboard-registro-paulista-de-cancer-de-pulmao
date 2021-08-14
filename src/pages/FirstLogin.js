@@ -57,10 +57,10 @@ export default function FirstLogin(){
             <Card className={classes.loginCard}>
                 <CardContent>
                     <Grid align="center">
-                        <Grid item xs={6} align="center">
-                            <Typography>
-                                <img className={classes.lungIcon}  src={lungIcon}/>
-                            </Typography>
+                        <Grid item xs={12} align="center">
+                            
+                                <img className={classes.lungIcon} style={{width: '70%', margin: 'auto'}} src={lungIcon}/>
+                        
                             <Typography variant="h5" color="primary">
                                 Registro Paulista de Câncer de Pulmão
                             </Typography>

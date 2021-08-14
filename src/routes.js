@@ -13,6 +13,7 @@ export default function Routes(){
             <Route path="/first-login" exact component={FirstLogin}/>
             <Route path="/login" exact component={Login}/>
             <Route path="/dashboard" exact component={Dashboard}/>
+            <Route path="/change-password" exact component={FirstLogin}/>
         </BrowserRouter>
     )
 }
