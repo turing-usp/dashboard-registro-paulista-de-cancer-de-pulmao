@@ -34,7 +34,6 @@ export default function Navbar({user}) {
   const logOut = async () => {
     await signOut(loading, setLoading, history);
   }
-  console.log(Object.keys(user.attributes))
   return (
       <AppBar className={classes.appBar} color="secondary" position="absolute">
         <Toolbar>

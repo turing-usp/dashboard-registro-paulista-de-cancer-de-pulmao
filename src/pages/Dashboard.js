@@ -15,6 +15,7 @@ import BySexGraph from '../components/dashboard/BySexGraph'
 import ByAgeRaceAndSexGraph from '../components/dashboard/ByAgeRaceAndSexGraph'
 import BySurgYearGraph from '../components/dashboard/BySurgYearGraph'
 import PieByInstitution from '../components/dashboard/PieByInstitution'
+import KMGraph from '../components/dashboard/KMGraph'
 //await Auth.currentAuthenticatedUser()
 
 export default function Dashboard() {
@@ -66,6 +67,9 @@ export default function Dashboard() {
             </Grid>
             <Grid item xs={6}>
               <PieByInstitution instituicao={user.attributes['custom:instituicao']} dataKey="readmissao_em_qualquer_hospital_em_30_dias_apos_a_alta" title="Readmissão em 30 dias"/>
+            </Grid>
+            <Grid item xs={12}>
+              <KMGraph instituicao={user.attributes['custom:instituicao']} title="KM"/>
             </Grid>
           </Grid>
         </div>

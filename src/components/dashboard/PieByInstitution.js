@@ -19,7 +19,6 @@ export default function PieByInstitution({instituicao, dataKey, title}) {
 
     const getDataFromAgeRange = async () => {
         let dataGet = await getDataAge(params.dataKey,  params.instituicao)
-        console.log(dataGet);
         setData(dataGet)
         setLoaded(true)
         prepareData();
@@ -35,14 +34,12 @@ export default function PieByInstitution({instituicao, dataKey, title}) {
                     filtered, 
                     v => Object.fromEntries(["Todos", params.instituicao].map(col => [col, sum(v, d => +d[col])/totals_obj[col]])), 
                     d => d[params.dataKey]);
-        console.log(dataGetReduced);
         let finalRechartsData = []
         dataGetReduced.forEach((key, value) => {
             let currentEntry = Object.fromEntries(dataGetReduced)[value]
             currentEntry[params.dataKey] = value
             finalRechartsData.push(currentEntry)
         })
-        console.log(finalRechartsData);
 
         setDataPrepared(finalRechartsData)
     }
