@@ -30,7 +30,6 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
 
     const getDataFromAgeRange = async () => {
         let dataGet = await getDataAge(params.dataKey,  params.instituicao)
-        console.log(dataGet)
         setData(dataGet)
         setLoaded(true)
         prepareData();
@@ -43,9 +42,13 @@ export default function ByAgeAndSexGraph({instituicao, dataKey, title}){
 
     const prepareData = () => {
         let filtered = data.filter(isFiltered);
+        let totals_obj = {}
+        totals_obj[params.instituicao] = rollup(filtered, v => sum(v, d => d[params.instituicao]))
+        totals_obj["Todos"] = rollup(filtered, v => sum(v, d => d["Todos"]))
+        
         let dataGetReduced = rollup(
                     filtered, 
-                    v => Object.fromEntries(["Outras", params.instituicao].map(col => [col, sum(v, d => +d[col])])), 
+                    v => Object.fromEntries(["Todos", params.instituicao].map(col => [col, sum(v, d => +d[col])/totals_obj[col]])), 
                     d => d[params.dataKey]);
         let finalRechartsData = []
         dataGetReduced.forEach((key, value) => {

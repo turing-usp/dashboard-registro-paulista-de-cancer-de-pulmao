@@ -1,6 +1,7 @@
 import Amplify, { Auth } from 'aws-amplify';
 
 export default function init(){
+    console.log(process.env)
     Amplify.configure({
         Auth: {
                 region: "sa-east-1",
@@ -12,7 +13,7 @@ export default function init(){
             endpoints: [
                 {
                     name: "RPCPEndpoints",
-                    endpoint: "https://5yr718co0f.execute-api.sa-east-1.amazonaws.com/prod/"
+                    endpoint: "https://3ffyl14toa.execute-api.sa-east-1.amazonaws.com/dev/" //process.env.API_ENDPOINT
                 }
             ]
         }

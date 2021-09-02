@@ -60,7 +60,7 @@ export default function BySurgYearGraph({instituicao, dataKey, title}){
         let filtered = data.filter(isFiltered);
         let dataGetReduced = rollup(
                     filtered, 
-                    v => Object.fromEntries(["Outras", params.instituicao].map(col => [col, sum(v, d => +d[col])])), 
+                    v => Object.fromEntries(["Todos", params.instituicao].map(col => [col, sum(v, d => +d[col])])), 
                     d => d[params.dataKey]);
         let finalRechartsData = []
         dataGetReduced.forEach((key, value) => {

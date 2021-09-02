@@ -20,10 +20,10 @@ export default function BarChartInstitution({data, dataKey, instituicao}){
                     >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey={dataKey} tick={false}/>
-                    <YAxis />
+                    <YAxis domain={[0, 1]} />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Outras" fill="#464F51" />
+                    <Bar dataKey="Todos" fill="#464F51" />
                     <Bar dataKey={instituicao} stackId="a" fill="#3db0fa" />
                 </BarChart>
             </ResponsiveContainer>
