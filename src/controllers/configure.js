@@ -1,7 +1,6 @@
 import Amplify, { Auth } from 'aws-amplify';
 
 export default function init(){
-    console.log(process.env)
     Amplify.configure({
         Auth: {
                 region: "sa-east-1",

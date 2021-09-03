@@ -23,8 +23,7 @@ export default function PieByInstitution({ instituicao, dataKey, title }) {
     const [dataPrepared, setDataPrepared] = useState([]);
 
     const getDataFromAgeRange = async () => {
-        let dataGet = await getDataAge(params.dataKey, params.instituicao)
-        console.log(dataGet);
+        let dataGet = await getDataAge(params.dataKey,  params.instituicao)
         setData(dataGet)
         setLoaded(true)
         prepareData();
@@ -47,7 +46,6 @@ export default function PieByInstitution({ instituicao, dataKey, title }) {
             currentEntry[params.dataKey] = value
             finalRechartsData.push(currentEntry)
         })
-        console.log({finalRechartsData, dataKey});
 
         setDataPrepared(finalRechartsData)
     }
@@ -60,13 +58,13 @@ export default function PieByInstitution({ instituicao, dataKey, title }) {
         <Box display="inline-block" width={'100%'} style={{ height: '100%', flexDirection: "column" }}>
             {loaded ?
                 <Paper elevation={0} variant="outlined" style={{ height: '100%' }} >
-                    <div style={{ height: "30%" }}>
+                    <div style={{ height: "10%" }}>
                         <Typography variant="h5" color="secondary" style={{ alignItems: 'center', display: 'flex', marginLeft: 10, marginTop: 10, marginBottom: 30, letterSpacing: 1 }}>
                             <StopRoundedIcon color="primary" style={{ marginRight: 10 }} />
                             {title}
                         </Typography>
                     </div>
-                    <div style={{ width: '100%', height: '70%', display: "flex", flexDirection: "column-reverse" }}>
+                    <div style={{ width: '100%', height: '80%', display: "flex", flexDirection: "column-reverse" }}>
                         <ResponsiveContainer width="99%" height="99%">
                             <PieChart width={500}
                                 height={500}>
