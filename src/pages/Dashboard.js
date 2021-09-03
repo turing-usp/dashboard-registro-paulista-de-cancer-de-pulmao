@@ -18,8 +18,8 @@ import PieByInstitution from '../components/dashboard/PieByInstitution'
 import KMGraph from '../components/dashboard/KMGraph'
 import ComorbidadesChart from '../components/dashboard/ComorbidadesChart'
 
-//await Auth.currentAuthenticatedUser()
-
+//await Auth.currentAuthenticatedUser()   <ComorbidadesChart instituicao={user.attributes['custom:instituicao']} title="Comorbidades"/>
+ 
 export default function Dashboard() {
   init();
   const classes = useStylesCreator()();
@@ -74,7 +74,7 @@ export default function Dashboard() {
               <KMGraph instituicao={user.attributes['custom:instituicao']} title="Sobrevida global (Kaplan Meier)"/>
             </Grid>
             <Grid item xs={12}>
-              <ComorbidadesChart instituicao={user.attributes['custom:instituicao']} title="Comorbidades"/>
+              
             </Grid>
           </Grid>
         </div>
