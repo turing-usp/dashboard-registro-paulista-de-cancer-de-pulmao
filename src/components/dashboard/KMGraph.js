@@ -1,4 +1,4 @@
-import { Box, Typography, Paper, Slider, FormControlLabel, Checkbox, FormControl, MenuItem, InputLabel, Select, LinearProgress } from '@material-ui/core';
+import { Box, Typography, Paper, Slider, FormControlLabel, Checkbox,Grid, FormControl, MenuItem, InputLabel, Select, LinearProgress } from '@material-ui/core';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 import useStylesCreator from '../../styles/styles'
@@ -22,15 +22,12 @@ export default function KMGraph({instituicao, title}){
         let records = {'instituicao': {}, 'todos': {}}
         for(var i =0; i < cats.length; i++){
             let dataGet = await getSurvivalGlobal(params.instituicao, cats[i])
-            console.log(dataGet)
             records['instituicao'][cats[i]] = dataGet['instituicao'][cats[i]]
             records['todos'][cats[i]] = dataGet['todos'][cats[i]]
-            console.log(records)
 
             
         }
         setData(records)
-        console.log(records)
         setLoaded(true)
     }
 
@@ -69,15 +66,14 @@ export default function KMGraph({instituicao, title}){
                 </div>
                 <div style={{width: '100%', height:'65%',  display: "flex", flexDirection: "column-reverse"}}>
                 <div style={{width: '100%', height:'100%',  display: "flex"}}>
-                <ResponsiveContainer width={'48%'} height={'99%'}>
+                <ResponsiveContainer width={'48%'} height={'85%'}>
                     <LineChart width={200} height={200} data={data['instituicao'][filter]}
                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                        <XAxis dataKey="timeline" />
-                        <YAxis />
+                        <XAxis dataKey="timeline" label={{ value: "Meses",  dy: 20}} />
+                        <YAxis  label={{ value: "KM estimate", angle: -90, dx: -20}}/>
                         <Tooltip />
-                        <Legend />
+                        <Legend wrapperStyle={{ position: 'relative' }}/>
                         {Object.keys(data['instituicao'][filter][0]).map((category, index) => {
-                            console.log(category)
                             if(category != "timeline"){
                                 return(
                                     <Line type="monotone" dataKey={category} stroke={COLORS[index]}/>
@@ -86,15 +82,14 @@ export default function KMGraph({instituicao, title}){
                         })}
                     </LineChart>
                 </ResponsiveContainer>
-                <ResponsiveContainer width={'48%'} height={'99%'}>
+                <ResponsiveContainer width={'48%'} height={'85%'}>
                     <LineChart width={200} height={200} data={data['todos'][filter]}
                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                        <XAxis dataKey="timeline" />
-                        <YAxis />
+                        <XAxis dataKey="timeline" label={{ value: "Meses",  dy: 20}} />
+                        <YAxis  label={{ value: "KM estimate", angle: -90, dx: -20}}/>
                         <Tooltip />
-                        <Legend />
+                        <Legend wrapperStyle={{ position: 'relative' }} />
                         {Object.keys(data['todos'][filter][0]).map((category, index) => {
-                            console.log(category)
                             if(category != "timeline"){
                                 return(
                                     <Line type="monotone" dataKey={category} stroke={COLORS[index]}/>
@@ -104,6 +99,18 @@ export default function KMGraph({instituicao, title}){
                     </LineChart>
                 </ResponsiveContainer>
                 </div>
+                <Grid container>
+                            <Grid item xs={6} align="center">
+                                <Typography color="secondary" variant="h6">
+                                    {params.instituicao}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6} align="center">
+                                <Typography color="secondary" variant="h6">
+                                    Todos
+                                </Typography>
+                            </Grid>
+                </Grid>
                 </div>
                 <Box m={3}/>
                 </Paper>

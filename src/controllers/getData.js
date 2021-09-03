@@ -60,3 +60,22 @@ export async function getSurvivalGlobal(instituicao, FilterKey){
     });
     return registers_get
 }
+
+export async function getComorbidades(instituicao){
+    init();
+
+    let registers_get = []
+    let myInit = { 
+        headers: { Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}` },
+        queryStringParameters: { 
+            instituicao: instituicao
+        }
+    }
+    await API.get("RPCPEndpoints", 'pacientes/getDataComorbidades', myInit).then(response => {
+        registers_get = response
+        }).catch(error => {
+        console.log(JSON.stringify(error))
+        return {}
+    });
+    return registers_get.items
+}
