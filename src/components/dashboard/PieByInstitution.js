@@ -10,10 +10,10 @@ import { getDataAge } from '../../controllers/getData'
 
 const COLORS = ['#8884d8', "#3db0fa", "#A2AEBB", "#C5D8D1", "#06BCC1", "#F4D1AE", "#3F3047", "#A22C29", "#E1BC29", "#4D9DE0", "#B0F2B4", "#542E71", "#A0CED9", "#C47AC0", "#EF8A17", "#EF2917"]
 
-export function toPercentage(value){
-    return (100*value).toFixed(1) + '%'
+export function toPercentage(value) {
+    return (100 * value).toFixed(1) + '%'
 }
-                                
+
 
 export default function PieByInstitution({ instituicao, dataKey, title }) {
     const classes = useStylesCreator()();
@@ -47,7 +47,7 @@ export default function PieByInstitution({ instituicao, dataKey, title }) {
             currentEntry[params.dataKey] = value
             finalRechartsData.push(currentEntry)
         })
-        console.log(finalRechartsData);
+        console.log({finalRechartsData, dataKey});
 
         setDataPrepared(finalRechartsData)
     }
@@ -103,6 +103,15 @@ export default function PieByInstitution({ instituicao, dataKey, title }) {
                                     }
                                 </Pie>
                                 <Tooltip formatter={(value, name, props) => toPercentage(value)} />
+                                <Legend payload={dataPrepared.map(
+                                    (item, index) => {
+                                        return ({
+                                            id: item[params.dataKey],
+                                            type: "square",
+                                            value: item[params.dataKey],
+                                            color: COLORS[index]
+                                        });
+                                    })} />
                             </PieChart>
                         </ResponsiveContainer>
                         <Grid container>
