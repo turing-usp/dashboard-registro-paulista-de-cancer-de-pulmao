@@ -13,7 +13,7 @@ export async function signIn(username, password, state, setState, history) {
             if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
                 return history.push("/change-password")
             } else {
-                return history.push("/dashboard")
+                return history.push("/home")
             } 
         } catch (error) {
             console.log('error signing in', error);
@@ -46,7 +46,7 @@ export async function firstLogin(username, password, newPassword, history){
                 newPassword)      
                 .then(user => {
                     console.log(user);
-                    return history.push("/dashboard")
+                    return history.push("/home")
             }).catch(e => {
               console.log(e);
               return alert(e)

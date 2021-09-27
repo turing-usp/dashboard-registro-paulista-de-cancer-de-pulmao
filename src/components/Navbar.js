@@ -38,7 +38,9 @@ export default function Navbar({user}) {
       <AppBar className={classes.appBar} color="secondary" position="absolute">
         <Toolbar>
           <div style={{height: "4vh"}}>
-            <img style={{height: "100%"}} className={classes.lungIcon}  src={lungIcon}/>
+            <a href="/home">
+              <img style={{height: "100%"}} className={classes.lungIcon}  src={lungIcon}/>
+            </a>
           </div>
           <Typography   variant="h5" className={classes.title}>
             Registro Paulista de Câncer de Pulmão
