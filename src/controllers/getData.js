@@ -1,4 +1,4 @@
-import Amplify, { Auth, API } from 'aws-amplify';
+import Amplify, { Auth, API, Storage } from 'aws-amplify';
 import init from './configure';
 
 export async function getDataAge(dataKey, instituicao){
@@ -78,4 +78,11 @@ export async function getComorbidades(instituicao){
         return {}
     });
     return registers_get.items
+}
+
+export async function getRedCapData(){
+    init();
+    const signedURL = await Storage.get("redcap.csv", { download: true});
+    console.log(signedURL)
+    return signedURL
 }
