@@ -3,7 +3,7 @@ import { useAsync } from "react-async-hook"
 import DonnutsCountChart from "../../components/Charts/DonnutsCountChart"
 import Layout from "../../components/Layout"
 import LoadingScreen from "../../components/LoadingScreen"
-import redcapCachedData, { RedcapRecord } from "../../data-source/redcap"
+import { redcapData, RedcapRecord } from "../../data-source/redcap"
 
 const charts_data = (data: RedcapRecord[]) => [
     // {
@@ -23,7 +23,7 @@ const DashboardAvaliaçãoPosOpeatoria: FunctionComponent = () => {
     const {
         loading,
         result: data
-    } = useAsync(redcapCachedData, [])
+    } = useAsync(redcapData, [])
 
     if (loading)
         return <LoadingScreen />

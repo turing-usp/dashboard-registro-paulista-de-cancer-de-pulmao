@@ -42,7 +42,7 @@ const Navbar: FunctionComponent = () => {
 
 
   return (
-    <AppBar className={classes.appBar} color="secondary" position="absolute">
+    <AppBar className={classes.appBar} color="secondary" position="relative">
       <Toolbar>
         <div style={{ height: "4vh" }}>
           <a href="/home">

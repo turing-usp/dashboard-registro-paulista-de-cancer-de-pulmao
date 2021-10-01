@@ -4,7 +4,7 @@ import DonnutsCountChart from "../../components/Charts/DonnutsCountChart"
 import BarCountChart from "../../components/Charts/BarCountChart"
 import Layout from "../../components/Layout"
 import LoadingScreen from "../../components/LoadingScreen"
-import redcapCachedData, { RedcapRecord } from "../../data-source/redcap"
+import { redcapData, RedcapRecord } from "../../data-source/redcap"
 
 const charts_data = (data: RedcapRecord[]) => [
     {
@@ -29,7 +29,7 @@ const DashboardCirurgia: FunctionComponent = () => {
     const {
         loading,
         result: data
-    } = useAsync(redcapCachedData, [])
+    } = useAsync(redcapData, [])
 
     if (loading)
         return <LoadingScreen />
