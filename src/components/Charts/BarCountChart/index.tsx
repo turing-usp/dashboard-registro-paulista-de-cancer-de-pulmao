@@ -1,6 +1,6 @@
 import { VegaLite, VisualizationSpec } from 'react-vega'
 import * as vl from 'vega-lite-api'
-import { RedcapRecord } from "../../../data-source/redcap"
+import { RedcapRecord } from "../../../controllers/getData"
 import { generateBars } from '../../../utils/charts'
 
 

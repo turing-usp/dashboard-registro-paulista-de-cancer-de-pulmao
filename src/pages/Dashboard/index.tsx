@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import Layout from '../../components/Layout'
 import Cards from "../../components/Cards";
+import { getRedcapS3 } from "../../controllers/getData";
 
 const cards_data = [
     {
@@ -25,18 +26,21 @@ const cards_data = [
     // },
 ]
 
-const Index: FunctionComponent = () => (
-    <Layout>
-        <main className="flex flex-col items-center w-full flex-1 px-20">
-            <h1 className="text-3xl font-bold mt-16">
-                Dashboards
-            </h1>
+const Index: FunctionComponent = () => {
+    getRedcapS3()
+    return (
+        <Layout>
+            <main className="flex flex-col items-center w-full flex-1 px-20">
+                <h1 className="text-3xl font-bold mt-16">
+                    Dashboards
+                </h1>
 
-            <Cards infos={cards_data} />
-        </main>
+                <Cards infos={cards_data} />
+            </main>
 
-    </Layout>
-)
+        </Layout>
+    );
+}
 
 
 export default Index

@@ -3,7 +3,7 @@ import { useAsync } from "react-async-hook"
 import DonnutsCountChart from "../../components/Charts/DonnutsCountChart"
 import Layout from "../../components/Layout"
 import LoadingScreen from "../../components/LoadingScreen"
-import { redcapData, RedcapRecord } from "../../data-source/redcap"
+import { redcapData, RedcapRecord } from "../../controllers/getData"
 
 const charts_data = (data: RedcapRecord[]) => [
     // {

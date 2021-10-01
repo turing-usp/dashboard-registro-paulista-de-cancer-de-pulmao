@@ -1,5 +1,5 @@
 import * as vl from 'vega-lite-api'
-import { RedcapRecord } from '../data-source/redcap'
+import { RedcapRecord } from '../controllers/getData'
 import { group } from 'd3'
 
 export const generateBars = (data: RedcapRecord[], field: string, title: string, filters: any[]) => vl.

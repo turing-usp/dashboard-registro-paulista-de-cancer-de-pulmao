@@ -4,7 +4,7 @@ import DonnutsCountChart from "../../components/Charts/DonnutsCountChart"
 import BarCountChart from "../../components/Charts/BarCountChart"
 import Layout from "../../components/Layout"
 import LoadingScreen from "../../components/LoadingScreen"
-import { redcapData, RedcapRecord } from "../../data-source/redcap"
+import { redcapData, RedcapRecord } from "../../controllers/getData"
 
 const charts_data = (data: RedcapRecord[]) => [
     {
