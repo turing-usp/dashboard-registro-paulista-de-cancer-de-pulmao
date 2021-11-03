@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 
 export default function CardHomePage({name, description, Icon, path, buttonText}){
     return(
-        <Card>
-            <Paper>
-                <CardContent  style={{height: "10vw"}}>
+        <Card style={{width:"100%"}}>
+                <CardContent>
                     <Box style={{height: "70%"}} m={1} display="flex" alignItems="center" flexDirection="column">
                         <Icon color="primary"/>
                         <Typography variant="h6" color="primary">
@@ -25,7 +24,6 @@ export default function CardHomePage({name, description, Icon, path, buttonText}
                         
                     
                 </CardContent>
-            </Paper>
         </Card>
     )
 }

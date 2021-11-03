@@ -2,8 +2,10 @@ import { FunctionComponent } from "react";
 import Navbar from "../Navbar";
 
 
-const Layout: FunctionComponent = ({ children }) => (
-    <div className="flex flex-col items-center justify-center min-h-screen" >
+const Layout: FunctionComponent = ({ children }) => {
+    var h = window.innerHeight;
+    return (
+    <div  className="flex flex-col items-center justify-center min-h-screen" >
         <Navbar />
 
         {children}
@@ -19,6 +21,6 @@ const Layout: FunctionComponent = ({ children }) => (
             </a>
         </footer> */}
     </div>
-)
+)}
 
 export default Layout
