@@ -1,6 +1,6 @@
-
 import { FunctionComponent } from "react";
 import SmartLink from "../SmartLink";
+import { Typography, Link, Box, Grid } from '@material-ui/core';
 
 type CardsProps = {
     infos: {
@@ -13,15 +13,15 @@ type CardsProps = {
 const Cards: FunctionComponent<CardsProps> = ({ infos }) => (
     <div className="flex flex-wrap items-center align-top justify-around max-w-5xl mt-6 sm:w-full">
         {infos.map(info => (
-            <SmartLink
+            <Link
+                underline="none"
                 href={info.link}
-                className="p-4 mt-6 mx-1 text-left border w-80 rounded-xl hover:text-blue-600 focus:text-blue-600"
             >
-                <h3 className="text-lg font-bold">{info.title} &rarr;</h3>
-                <p className="mt-4 text-base">
+                <Typography color="primary" variant="h5">{info.title} &rarr;</Typography>
+                <Typography color="secondary">
                     {info.description}
-                </p>
-            </SmartLink>
+                </Typography>
+            </Link>
 
         ))}
     </div>

@@ -2,6 +2,8 @@ import { FunctionComponent } from "react";
 import Layout from '../../components/Layout'
 import Cards from "../../components/Cards";
 import { getRedcapS3 } from "../../controllers/getData";
+import { Typography, LinearProgress, Box, Grid } from '@material-ui/core';
+
 
 const cards_data = [
     {
@@ -30,14 +32,14 @@ const Index: FunctionComponent = () => {
     getRedcapS3()
     return (
         <Layout>
-            <main className="flex flex-col items-center w-full flex-1 px-20">
-                <h1 className="text-3xl font-bold mt-16">
+            <Box m={3}>
+                <Typography variant="h4" color="primary" style={{fontWeight: 800}}>
                     Dashboards
-                </h1>
-
+                </Typography>
+            </Box>
+            <Box m={3}>
                 <Cards infos={cards_data} />
-            </main>
-
+            </Box>
         </Layout>
     );
 }

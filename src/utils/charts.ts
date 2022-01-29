@@ -2,14 +2,17 @@ import * as vl from 'vega-lite-api'
 import { RedcapRecord } from '../controllers/getData'
 import { group } from 'd3'
 
-export const generateBars = (data: RedcapRecord[], field: string, title: string, filters: any[]) => vl.
+
+export const generateBars = (data: RedcapRecord[], field: string, title: string, color: string, filters: any[]) => {
+    let intViewportWidth = window.innerWidth;
+    return vl.
     data(data)
     .title(title)
     .transform(
         ...filters,
         ...relativeFrequency(field, 'Porcentagem')
     ).encode(
-        // vl.color().value('#3db0fa'),
+        vl.color().value(color),
         vl.y()
             .fieldO(field)
             .scale({ domain: uniques(field, data) })
@@ -25,10 +28,11 @@ export const generateBars = (data: RedcapRecord[], field: string, title: string,
             .encode(
                 vl.text().fieldN('Porcentagem').format(".2%")
             )
-    ).width(800)
+    ).width(intViewportWidth*0.6)}
 
 export const generateDonnuts = (data: RedcapRecord[], field: string, title: string, filters: any[]) => {
-    return vl.
+    let intViewportWidth = window.innerWidth;
+    const chart =  vl.
         data(data)
         .title(title)
         .transform(
@@ -42,16 +46,18 @@ export const generateDonnuts = (data: RedcapRecord[], field: string, title: stri
             vl.tooltip().fieldQ('Porcentagem').format('.2%'),
         )
         .layer(
-            vl.markArc({ innerRadius: 40, outerRadius: 120 }),
-            vl.markText({ radius: 140 })
+            vl.markArc({ innerRadius: 0, outerRadius: intViewportWidth/15 }),
+            vl.markText({ radius: intViewportWidth/13 })
                 .encode(
                     vl.text().fieldN(field)
                 ),
-            vl.markText({ radius: 80, fill: 'white' })
+            vl.markText({ radius: intViewportWidth/25, fill: 'white' })
                 .encode(
                     vl.text().fieldQ('Porcentagem').format('.1%').if({ field: "Porcentagem", lt: 0.04 })
                 ),
-        )
+        ).autosize({type: 'fit', contains: 'padding'})
+
+    return chart 
 }
 
 export const uniques = (key: string, data: any[]) => [...group(data, d => d[key]).keys()].sort()
